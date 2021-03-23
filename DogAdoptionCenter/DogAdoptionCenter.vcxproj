@@ -148,9 +148,7 @@
   <ItemGroup>
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="Dog.cpp" />
-    <ClCompile Include="DynamicVector.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Repository.cpp" />
     <ClCompile Include="Service.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

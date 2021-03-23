@@ -2,12 +2,22 @@
 #include <sstream>
 #include <iostream>
 
-Dog::Dog(std::string name, std::string breed, int age, std::string photo_link)
+
+Dog::Dog()
 {
-	this->name = name;
-	this->breed = breed;
-	this->age = age;
-	this->photo_link = photo_link;
+	this->id = this->current_id;
+	this->name = "";
+	this->breed = "";
+	this->age = 0;
+	this->photo_link = "";
+
+	this->current_id++;
+}
+
+Dog::Dog(std::string _name, std::string _breed, int _age, std::string _photo_link) : name{ _name }, breed{ _breed }, age{ _age }, photo_link{ _photo_link }
+{
+	this->id = this->current_id;
+	this->current_id++;
 }
 
 Dog::~Dog()
@@ -17,6 +27,8 @@ Dog::~Dog()
 std::string Dog::ToString() const
 {
 	std::stringstream buffer;
-	buffer << "Name: " << this->name << "; Breed: " << this->breed << "; Age: " << this->age << "; Photo: " << this->photo_link << "\n";
+	buffer << "Id: " << this->id << "; Name: " << this->name << "; Breed: " << this->breed << "; Age: " << this->age << "; Photo: " << this->photo_link << "\n";
 	return buffer.str();
 }
+
+int Dog::current_id = 0;
