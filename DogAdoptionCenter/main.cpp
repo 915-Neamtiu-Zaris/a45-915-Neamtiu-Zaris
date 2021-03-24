@@ -37,10 +37,14 @@ See the adoption list.
 // main module
 
 #include "Console.h"
+#include "Test.h"
 #include <iostream>
 
 int main()
 {
+	Test t;
+	t.run_tests();
+
 	Console c;
 	c.runConsole();
 

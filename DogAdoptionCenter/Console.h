@@ -35,7 +35,7 @@ void Console::printInitialPrompt()
 
 void Console::printAdminMenu()
 {
-	std::cout << "1 - Add a dog.\n2 - Remove a dog.\n3 - Update a dog.\n4 - Print all dogs.\n5 - Exit.\n";
+	std::cout << "\n1 - Add a dog.\n2 - Remove a dog.\n3 - Update a dog.\n4 - Print all dogs.\n5 - Exit.\n";
 }
 
 void Console::printUserMenu()

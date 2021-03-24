@@ -1,5 +1,6 @@
 // Dog module
 #include <string>
+#pragma once
 
 class Dog
 {
@@ -27,6 +28,18 @@ public:
 
 	// Id getter
 	int get_id();
+
+	// Name getter
+	std::string get_name();
+
+	// Breed getter
+	std::string get_breed();
+
+	// Age getter
+	int get_age();
+
+	// Photo link getter
+	std::string get_photoLink();
 
 	// Id setter
 	void set_id(int id);

@@ -68,16 +68,16 @@ inline int Service::getNrDogs()
 
 inline void Service::add10Dogs()
 {
-	Dog d1("Bobita", "Yorkshire Terrier", 11, "asd");
-	Dog d2("Rex", "German Shepherd", 2, "asd");
-	Dog d3("Thor", "Bulldog", 6, "asd");
-	Dog d4("Avalach", "Siberian Husky", 1, "asd");
-	Dog d5("Astral", "Siberian Husky", 8, "asd");
-	Dog d6("Pumba", "Chihuahua", 1, "asd");
-	Dog d7("Bono", "Doberman", 9, "asd");
-	Dog d8("Cora", "Bichon", 4, "asd");
-	Dog d9("Bobo", "Dalmatian", 6, "asd");
-	Dog d10("Terry", "Rottweiler", 1, "asd");
+	Dog d1("Bobita", "Yorkshire Terrier", 11, "https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/");
+	Dog d2("Rex", "German Shepherd", 2, "https://www.pexels.com/photo/brown-and-white-short-coated-puppy-1805164/");
+	Dog d3("Thor", "Bulldog", 6, "https://www.pexels.com/photo/short-coated-tan-dog-2253275/");
+	Dog d4("Avalach", "Siberian Husky", 1, "https://www.pexels.com/photo/cute-puppy-wearing-a-party-hat-4588047/");
+	Dog d5("Astral", "Siberian Husky", 8, "https://www.pexels.com/photo/short-coated-brown-dog-sitting-inside-a-car-2797318/");
+	Dog d6("Pumba", "Chihuahua", 1, "https://www.pexels.com/photo/photo-of-dog-lying-on-bed-1839753/");
+	Dog d7("Bono", "Doberman", 9, "https://www.pexels.com/photo/brown-pomeranian-puppy-on-grey-concrete-floor-3687770/");
+	Dog d8("Cora", "Bichon", 4, "https://www.pexels.com/photo/white-and-brown-short-coated-dog-4587971/");
+	Dog d9("Bobo", "Dalmatian", 6, "https://www.pexels.com/photo/brown-and-white-dog-wearing-yellow-knit-cap-4588052/");
+	Dog d10("Terry", "Rottweiler", 1, "https://www.pexels.com/photo/white-and-black-siberian-husky-puppy-3663082/");
 
 	this->repo.add(d1);
 	this->repo.add(d2);

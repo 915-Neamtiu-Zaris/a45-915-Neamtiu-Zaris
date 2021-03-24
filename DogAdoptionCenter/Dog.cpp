@@ -27,13 +27,33 @@ Dog::~Dog()
 std::string Dog::ToString() const
 {
 	std::stringstream buffer;
-	buffer << "Id: " << this->id << "; Name: " << this->name << "; Breed: " << this->breed << "; Age: " << this->age << "; Photo: " << this->photo_link << "\n";
+	buffer << "Id: " << this->id << "; Name: " << this->name << "; Breed: " << this->breed << "; Age: " << this->age << "; Photo: " << this->photo_link << " \n";
 	return buffer.str();
 }
 
 int Dog::get_id()
 {
 	return this->id;
+}
+
+std::string Dog::get_name()
+{
+	return this->name;
+}
+
+std::string Dog::get_breed()
+{
+	return this->breed;
+}
+
+int Dog::get_age()
+{
+	return this->age;
+}
+
+std::string Dog::get_photoLink()
+{
+	return this->photo_link;
 }
 
 void Dog::set_id(int id)
