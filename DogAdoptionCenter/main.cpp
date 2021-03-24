@@ -36,51 +36,13 @@ See the adoption list.
 
 // main module
 
-#include "Dog.h"
-#include "DynamicVector.h"
-#include "Repository.h"
+#include "Console.h"
 #include <iostream>
 
 int main()
 {
-	Dog d1("Bobita", "Yorkshire Terrier", 11, "asd");
-	Dog d2("Rex", "German Shepherd", 2, "asd");
-	Dog d3("Thor", "Bulldog", 6, "asd");
-	Dog d4("Avalach", "Siberian Husky", 1, "asd");
-	Dog d5("Lara", "Rottweiler", 6, "asd");
-
-	/*
-	DynamicVector<Dog> dogs;
-
-	dogs.add(d1);
-	dogs.add(d2);
-	dogs.add(d3);
-	dogs.add(d4);
-	dogs.add(d5);
-	
-	for (int i = 0; i < dogs.getLength(); ++i)
-		std::cout << dogs[i].ToString();
-	std::cout << '\n';
-
-	dogs.removeElem(2);
-
-	for (int i = 0; i < dogs.getLength(); ++i)
-		std::cout << dogs[i].ToString();
-	std::cout << '\n';
-	*/
-
-	Repository<Dog> repoDogs;
-	repoDogs.add(d1);
-	repoDogs.add(d2);
-	repoDogs.add(d3);
-	repoDogs.add(d4);
-	repoDogs.add(d5);
-
-	Dog* dogs = repoDogs.getAllElements();
-	int nrDogs = repoDogs.getNrElements();
-
-	for (int i = 0; i < nrDogs; ++i)
-		std::cout << dogs[i].ToString();
+	Console c;
+	c.runConsole();
 
 	return 0;
 }

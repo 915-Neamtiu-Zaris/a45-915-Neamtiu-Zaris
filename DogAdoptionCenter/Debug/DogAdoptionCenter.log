@@ -1,4 +1,5 @@
 ﻿  Dog.cpp
   main.cpp
   Generating Code...
+C:\Users\zneam\OneDrive\Documents\GitHub\a45-915-Neamtiu-Zaris\DogAdoptionCenter\Repository.h(77): warning C4715: 'Repository<Dog>::updateElem': not all control paths return a value
   DogAdoptionCenter.vcxproj -> C:\Users\zneam\OneDrive\Documents\GitHub\a45-915-Neamtiu-Zaris\DogAdoptionCenter\Debug\DogAdoptionCenter.exe

@@ -24,4 +24,11 @@ public:
 
 	// ToString method.
 	std::string ToString() const;
+
+	// Id getter
+	int get_id();
+
+	// Id setter
+	void set_id(int id);
+
 };

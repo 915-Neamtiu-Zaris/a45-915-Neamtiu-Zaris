@@ -146,7 +146,6 @@
     <ClInclude Include="Service.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Console.cpp" />
     <ClCompile Include="Dog.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Service.cpp" />

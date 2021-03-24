@@ -120,7 +120,11 @@ inline T DynamicVector<T>::removeElem(int pos)
 template<typename T>
 inline T DynamicVector<T>::updateElem(int pos, T newElem)
 {
+	T elemTBR = this->arr[pos];
+	newElem.set_id(elemTBR.get_id());
 	this->arr[pos] = newElem;
+
+	return elemTBR;
 }
 
 template<typename T>

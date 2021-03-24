@@ -31,4 +31,16 @@ std::string Dog::ToString() const
 	return buffer.str();
 }
 
+int Dog::get_id()
+{
+	return this->id;
+}
+
+void Dog::set_id(int id)
+{
+	this->id = id;
+}
+
+
+
 int Dog::current_id = 0;
