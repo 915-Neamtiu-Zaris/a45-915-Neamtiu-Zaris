@@ -52,6 +52,15 @@ void Test::test_remove()
 	assert(newnrDogs == nrDogs - 1);
 
 	this->s_test.removeDogById(dogs[0].get_id());
+	try
+	{
+		this->s_test.removeDogById(99);
+	}
+	catch (int ex)
+	{
+		
+	}
+	
 	newnrDogs = this->s_test.getNrDogs();
 
 	assert(newnrDogs == nrDogs - 2);
@@ -70,10 +79,21 @@ void Test::test_update()
 
 	this->s_test.updateDogById(dogs[0].get_id(), "a", "a", 2, "a");
 
+	try
+	{ 
+		this->s_test.updateDogById(99, "a", "a", 2, "a");
+	}
+	catch (int ex)
+	{
+
+	}
+
 	assert(dogs[0].get_name() == "a");
 	assert(dogs[0].get_breed() == "a");
 	assert(dogs[0].get_age() == 2);
 	assert(dogs[0].get_photoLink() == "a");
+
+	dogs[0].ToString();
 }
 
 void Test::run_tests()
