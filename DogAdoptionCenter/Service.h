@@ -7,6 +7,7 @@
 class Service {
 private:
 	Repository<Dog> repo;
+	Repository<Dog> adoptionList;
 
 public:
 
@@ -19,6 +20,10 @@ public:
 	Dog* getAllDogs();
 	int getNrDogs();
 	void add10Dogs();
+	int filterDogsBreedAge(std::string breed, int age, Dog* filteredDogs);
+	Dog* getAdoptedDogs();
+	int getNrAdoptedDogs();
+	void addToAdoptionList(Dog d);
 };
 
 Service::Service()
@@ -89,5 +94,40 @@ inline void Service::add10Dogs()
 	this->repo.add(d8);
 	this->repo.add(d9);
 	this->repo.add(d10);
+}
+
+inline int Service::filterDogsBreedAge(std::string breed, int age, Dog* filteredDogs)
+{
+	Dog* dogs = this->getAllDogs();
+	int nrDogs = this->getNrDogs();
+
+	if (breed == "")
+		return 0;
+
+	int nrTBR = 0;
+
+	for (int i = 0; i < nrDogs; ++i)
+		if (dogs[i].get_breed() == breed && dogs[i].get_age() < age)
+		{
+			filteredDogs[nrTBR] = dogs[i];
+			nrTBR++;
+		}
+
+	return nrTBR;
+}
+
+inline Dog* Service::getAdoptedDogs()
+{
+	return this->adoptionList.getAllElements();
+}
+
+inline int Service::getNrAdoptedDogs()
+{
+	return this->adoptionList.getNrElements();
+}
+
+inline void Service::addToAdoptionList(Dog d)
+{
+	this->adoptionList.add(d);
 }
 

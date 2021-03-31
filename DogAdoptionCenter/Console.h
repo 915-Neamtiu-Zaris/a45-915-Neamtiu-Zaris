@@ -3,6 +3,7 @@
 
 #include "Service.h"
 #include <iostream>
+#include <sstream>
 
 class Console {
 private:
@@ -16,6 +17,7 @@ public:
 	void printInitialPrompt();
 	void printAdminMenu();
 	void printUserMenu();
+	void printAdoptionPrompt();
 	void runConsole();
 };
 
@@ -40,6 +42,12 @@ void Console::printAdminMenu()
 
 void Console::printUserMenu()
 {
+	std::cout << "\n1 - View dogs.\n2 - Filter dogs by breed, with maximum age.\n3 - See adoption list.\n4 - Exit\n";
+}
+
+inline void Console::printAdoptionPrompt()
+{
+	std::cout << "\n1 - Adopt.\n2 - Next.\n3 - See adoption list.\n4 - Return.\n";
 }
 
 inline void Console::runConsole()
@@ -135,6 +143,105 @@ inline void Console::runConsole()
 	}
 	else if (initialCommand == 'u')
 	{
+		while (true)
+		{
+			this->printUserMenu();
+			int command;
+			std::cin >> command;
 
+			if (command == 1)
+			{
+				bool go = true;
+				int ind = 0;
+				int nrDogs = this->s.getNrDogs();
+				Dog* dogs = this->s.getAllDogs();
+				int cmd;
+
+				while (go)
+				{
+					std::cout << "\nCurrent dog: " << dogs[ind % nrDogs].ToString() << "\n";
+					this->printAdoptionPrompt();
+
+					std::cin >> cmd;
+
+					if (cmd == 1)
+					{
+						// Adding to adoption list.
+						this->s.addToAdoptionList(dogs[ind % nrDogs]);
+
+						// Removing from dog repo.
+						this->s.removeDogById(dogs[ind % nrDogs].get_id());
+
+						// Refresh dog list.
+						dogs = this->s.getAllDogs();
+						nrDogs = this->s.getNrDogs();
+						ind++;
+					}
+					else if (cmd == 2)
+					{
+						ind++;
+					}
+					else if (cmd == 3)
+					{
+						std::cout << "\nAdoption list: \n";
+
+						Dog* dogs = this->s.getAdoptedDogs();
+						int nrDogs = this->s.getNrAdoptedDogs();
+
+						for (int i = 0; i < nrDogs; ++i)
+							std::cout << dogs[i].ToString();
+
+						std::cout << '\n';
+					}
+					else if (cmd == 4)
+					{
+						go = false;
+					}
+				}
+			}
+			else if (command == 2)
+			{
+				std::string breed;
+				int age;
+				std::getchar();
+				std::cout << "The breed that you want to filter by: ";
+				std::getline(std::cin, breed);
+				std::istringstream iss(breed);
+				std::cout << "The age that you want to filter by: ";
+				std::cin >> age;
+
+				Dog filteredDogs[101];
+
+				int nrDogs = this->s.filterDogsBreedAge(breed, age, filteredDogs);
+
+				if (nrDogs == 0)
+				{
+
+					Dog* dogs = this->s.getAllDogs();
+					int nrDogs = this->s.getNrDogs();
+
+					for (int i = 0; i < nrDogs; ++i)
+						std::cout << dogs[i].ToString();
+				}
+				else
+				{
+					for (int i = 0; i < nrDogs; ++i)
+						std::cout << filteredDogs[i].ToString();
+				}
+			}
+			else if (command == 3)
+			{
+				Dog* dogs = this->s.getAdoptedDogs();
+				int nrDogs = this->s.getNrAdoptedDogs();
+				
+				std::cout << "\nAdoption list: \n";
+				for (int i = 0; i < nrDogs; ++i)
+					std::cout << dogs[i].ToString();
+			}
+			else if (command == 4)
+			{
+				return;
+			}
+		}
 	}
 }
