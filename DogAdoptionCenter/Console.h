@@ -31,7 +31,7 @@ Console::~Console()
 
 void Console::printInitialPrompt()
 {
-	std::cout << "Select the mode you would like to use the application in:"
+	std::cout << "\nSelect the mode you would like to use the application in:"
 		"\na - Administrator mode.\nu - User mode.\n";
 }
 
@@ -47,200 +47,208 @@ void Console::printUserMenu()
 
 inline void Console::printAdoptionPrompt()
 {
-	std::cout << "\n1 - Adopt.\n2 - Next.\n3 - See adoption list.\n4 - Return.\n";
+	std::cout << "\n1 - Adopt.\n2 - See dog's photo.\n3 - Next.\n4 - See adoption list.\n5 - Return.\n";
 }
 
 inline void Console::runConsole()
 {
 	this->s.add10Dogs();
 	char initialCommand;
-	this->printInitialPrompt();
-	
-	std::cin >> initialCommand;
 
-	if (initialCommand == 'a')
+	while (true)
 	{
-		while (true)
+		this->printInitialPrompt();
+
+		std::cin >> initialCommand;
+
+		if (initialCommand == 'a')
 		{
-			this->printAdminMenu();
-
-			int command;
-			std::cin >> command;
-
-			if (command == 1)
+			while (true)
 			{
-				std::string name;
-				std::string breed;
-				int age;
-				std::string photo_link;
+				this->printAdminMenu();
 
-				std::cout << "Name: ";
-				std::cin >> name;
-				std::cout << "Breed: ";
-				std::cin >> breed;
-				std::cout << "Age: ";
-				std::cin >> age;
-				std::cout << "Photo link: ";
-				std::cin >> photo_link;
+				int command;
+				std::cin >> command;
 
-				this->s.addDogByVars(name, breed, age, photo_link);
-			}
-			else if (command == 2)
-			{
-				int id;
-				std::cout << "The id of the dog to be removed: ";
-				std::cin >> id;
-				try
+				if (command == 1)
 				{
-					this->s.removeDogById(id);
+					std::string name;
+					std::string breed;
+					int age;
+					std::string photo_link;
+
+					std::cout << "Name: ";
+					std::cin >> name;
+					std::cout << "Breed: ";
+					std::cin >> breed;
+					std::cout << "Age: ";
+					std::cin >> age;
+					std::cout << "Photo link: ";
+					std::cin >> photo_link;
+
+					this->s.addDogByVars(name, breed, age, photo_link);
 				}
-				catch(int ex)
+				else if (command == 2)
 				{
-					if (ex == 21)
-						std::cout << "The dog you are trying to remove does not exist.\n";
-				}
-			}
-			else if (command == 3)
-			{
-				int id;
-				std::string name;
-				std::string breed;
-				int age;
-				std::string photo_link;
-
-				std::cout << "The id of the dog you want to update: ";
-				std::cin >> id;
-				std::cout << "Name: ";
-				std::cin >> name;
-				std::cout << "Breed: ";
-				std::cin >> breed;
-				std::cout << "Age: ";
-				std::cin >> age;
-				std::cout << "Photo link: ";
-				std::cin >> photo_link;
-
-				try
-				{
-					this->s.updateDogById(id, name, breed, age, photo_link);
-				}
-				catch (int ex)
-				{
-					if (ex == 21)
-						std::cout << "The dog you are trying to update does not exist.\n";
-				}
-			}
-			else if (command == 4)
-			{
-				Dog* dogs = this->s.getAllDogs();
-				int nrDogs = this->s.getNrDogs();
-
-				for (int i = 0; i < nrDogs; ++i)
-					std::cout << dogs[i].ToString();
-			}
-			else if (command == 5)
-				return;
-		}
-	}
-	else if (initialCommand == 'u')
-	{
-		while (true)
-		{
-			this->printUserMenu();
-			int command;
-			std::cin >> command;
-
-			if (command == 1)
-			{
-				bool go = true;
-				int ind = 0;
-				int nrDogs = this->s.getNrDogs();
-				Dog* dogs = this->s.getAllDogs();
-				int cmd;
-
-				while (go)
-				{
-					std::cout << "\nCurrent dog: " << dogs[ind % nrDogs].ToString() << "\n";
-					this->printAdoptionPrompt();
-
-					std::cin >> cmd;
-
-					if (cmd == 1)
+					int id;
+					std::cout << "The id of the dog to be removed: ";
+					std::cin >> id;
+					try
 					{
-						// Adding to adoption list.
-						this->s.addToAdoptionList(dogs[ind % nrDogs]);
-
-						// Removing from dog repo.
-						this->s.removeDogById(dogs[ind % nrDogs].get_id());
-
-						// Refresh dog list.
-						dogs = this->s.getAllDogs();
-						nrDogs = this->s.getNrDogs();
-						ind++;
+						this->s.removeDogById(id);
 					}
-					else if (cmd == 2)
+					catch (int ex)
 					{
-						ind++;
-					}
-					else if (cmd == 3)
-					{
-						std::cout << "\nAdoption list: \n";
-
-						Dog* dogs = this->s.getAdoptedDogs();
-						int nrDogs = this->s.getNrAdoptedDogs();
-
-						for (int i = 0; i < nrDogs; ++i)
-							std::cout << dogs[i].ToString();
-
-						std::cout << '\n';
-					}
-					else if (cmd == 4)
-					{
-						go = false;
+						if (ex == 21)
+							std::cout << "The dog you are trying to remove does not exist.\n";
 					}
 				}
-			}
-			else if (command == 2)
-			{
-				std::string breed;
-				int age;
-				std::getchar();
-				std::cout << "The breed that you want to filter by: ";
-				std::getline(std::cin, breed);
-				std::istringstream iss(breed);
-				std::cout << "The age that you want to filter by: ";
-				std::cin >> age;
-
-				Dog filteredDogs[101];
-
-				int nrDogs = this->s.filterDogsBreedAge(breed, age, filteredDogs);
-
-				if (nrDogs == 0)
+				else if (command == 3)
 				{
+					int id;
+					std::string name;
+					std::string breed;
+					int age;
+					std::string photo_link;
 
+					std::cout << "The id of the dog you want to update: ";
+					std::cin >> id;
+					std::cout << "Name: ";
+					std::cin >> name;
+					std::cout << "Breed: ";
+					std::cin >> breed;
+					std::cout << "Age: ";
+					std::cin >> age;
+					std::cout << "Photo link: ";
+					std::cin >> photo_link;
+
+					try
+					{
+						this->s.updateDogById(id, name, breed, age, photo_link);
+					}
+					catch (int ex)
+					{
+						if (ex == 21)
+							std::cout << "The dog you are trying to update does not exist.\n";
+					}
+				}
+				else if (command == 4)
+				{
 					Dog* dogs = this->s.getAllDogs();
 					int nrDogs = this->s.getNrDogs();
 
 					for (int i = 0; i < nrDogs; ++i)
 						std::cout << dogs[i].ToString();
 				}
-				else
+				else if (command == 5)
+					return;
+			}
+		}
+		else if (initialCommand == 'u')
+		{
+			while (true)
+			{
+				this->printUserMenu();
+				int command;
+				std::cin >> command;
+
+				if (command == 1)
 				{
-					for (int i = 0; i < nrDogs; ++i)
-						std::cout << filteredDogs[i].ToString();
+					bool go = true;
+					int ind = 0;
+					int nrDogs = this->s.getNrDogs();
+					Dog* dogs = this->s.getAllDogs();
+					int cmd;
+
+					while (go)
+					{
+						std::cout << "\nCurrent dog: " << dogs[ind % nrDogs].ToString() << "\n";
+						this->printAdoptionPrompt();
+
+						std::cin >> cmd;
+
+						if (cmd == 1)
+						{
+							// Adding to adoption list.
+							this->s.addToAdoptionList(dogs[ind % nrDogs]);
+
+							// Removing from dog repo.
+							this->s.removeDogById(dogs[ind % nrDogs].get_id());
+
+							// Refresh dog list.
+							dogs = this->s.getAllDogs();
+							nrDogs = this->s.getNrDogs();
+							ind++;
+						}
+						else if (cmd == 2)
+						{
+							system(std::string("start " + dogs[ind % nrDogs].get_photoLink()).c_str());
+						}
+						else if (cmd == 3)
+						{
+							ind++;
+						}
+						else if (cmd == 4)
+						{
+							std::cout << "\nAdoption list: \n";
+
+							Dog* dogs = this->s.getAdoptedDogs();
+							int nrDogs = this->s.getNrAdoptedDogs();
+
+							for (int i = 0; i < nrDogs; ++i)
+								std::cout << dogs[i].ToString();
+
+							std::cout << '\n';
+						}
+						else if (cmd == 5)
+						{
+							go = false;
+						}
+					}
 				}
-			}
-			else if (command == 3)
-			{
-				Dog* dogs = this->s.getAdoptedDogs();
-				int nrDogs = this->s.getNrAdoptedDogs();
-				
-				std::cout << "\nAdoption list: \n";
-				for (int i = 0; i < nrDogs; ++i)
-					std::cout << dogs[i].ToString();
-			}
-			else if (command == 4)
-			{
-				return;
+				else if (command == 2)
+				{
+					std::string breed;
+					int age;
+					std::getchar();
+					std::cout << "The breed that you want to filter by: ";
+					std::getline(std::cin, breed);
+					std::istringstream iss(breed);
+					std::cout << "The age that you want to filter by: ";
+					std::cin >> age;
+
+					Dog filteredDogs[101];
+
+					int nrDogs = this->s.filterDogsBreedAge(breed, age, filteredDogs);
+
+					if (nrDogs == 0)
+					{
+
+						Dog* dogs = this->s.getAllDogs();
+						int nrDogs = this->s.getNrDogs();
+
+						for (int i = 0; i < nrDogs; ++i)
+							std::cout << dogs[i].ToString();
+					}
+					else
+					{
+						for (int i = 0; i < nrDogs; ++i)
+							std::cout << filteredDogs[i].ToString();
+					}
+				}
+				else if (command == 3)
+				{
+					Dog* dogs = this->s.getAdoptedDogs();
+					int nrDogs = this->s.getNrAdoptedDogs();
+
+					std::cout << "\nAdoption list: \n";
+					for (int i = 0; i < nrDogs; ++i)
+						std::cout << dogs[i].ToString();
+				}
+				else if (command == 4)
+				{
+					return;
+				}
 			}
 		}
 	}
